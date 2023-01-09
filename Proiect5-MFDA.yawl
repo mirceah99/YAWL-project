@@ -1,0 +1,711 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="Proiect5-MFDA">
+    <name>Proiect5-MFDA</name>
+    <documentation>Proiect 5 MFDA</documentation>
+    <metaData>
+      <title>Proiect5-MFDA</title>
+      <creator>mircea</creator>
+      <description>Proiect 5 MFDA</description>
+      <coverage>5.0.805</coverage>
+      <version>0.14</version>
+      <persistent>false</persistent>
+      <identifier>UID_7be7a1b1-a667-4541-bdc6-6ae60f3587e7</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>P_Name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>1</index>
+        <name>P_ID</name>
+        <type>unsignedInt</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>0</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>2</index>
+        <name>P_Requirements</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>3</index>
+        <name>P_Budget</name>
+        <type>unsignedInt</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>0</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>4</index>
+        <name>P_Team</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>5</index>
+        <name>P_Implemented</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>false</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>6</index>
+        <name>P_Approved</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>false</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="CreateProjectRequest" />
+          </flowsInto>
+        </inputCondition>
+        <task id="CreateProjectRequest">
+          <name>CreateProjectRequest</name>
+          <flowsInto>
+            <nextElementRef id="Cancel" />
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="AssignTeam" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;P_Name&gt;{/CreateProjectRequest/P_Name/text()}&lt;/P_Name&gt;" />
+              <mapsTo>P_Name</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;P_ID&gt;{/CreateProjectRequest/P_ID/text()}&lt;/P_ID&gt;" />
+              <mapsTo>P_ID</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;P_Requirements&gt;{/CreateProjectRequest/P_Requirements/text()}&lt;/P_Requirements&gt;" />
+              <mapsTo>P_Requirements</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-e4600e4e-d31b-4192-9006-229761737c56</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="CreateProjectRequest" />
+        </task>
+        <task id="AssignTeam">
+          <name>AssignTeam</name>
+          <flowsInto>
+            <nextElementRef id="TeamAExecuteProject" />
+            <isDefaultFlow />
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="TeamBExecuteProject" />
+            <predicate ordering="0">/Net/P_Team/text()='B'</predicate>
+          </flowsInto>
+          <join code="xor" />
+          <split code="xor" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;P_Name&gt;{/Net/P_Name/text()}&lt;/P_Name&gt;" />
+              <mapsTo>P_Name</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;P_Budget&gt;{/Net/P_Budget/text()}&lt;/P_Budget&gt;" />
+              <mapsTo>P_Budget</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;P_Requirements&gt;{/Net/P_Requirements/text()}&lt;/P_Requirements&gt;" />
+              <mapsTo>P_Requirements</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;P_ID&gt;{/Net/P_ID/text()}&lt;/P_ID&gt;" />
+              <mapsTo>P_ID</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;P_Team&gt;{/AssignTeam/P_Team/text()}&lt;/P_Team&gt;" />
+              <mapsTo>P_Team</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-e4600e4e-d31b-4192-9006-229761737c56</role>
+                </initialSet>
+              </distributionSet>
+              <familiarParticipant taskID="CreateProjectRequest" />
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="AssignTeam" />
+        </task>
+        <task id="Cancel">
+          <name>Cancel</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <removesTokens id="AssignTeam" />
+          <removesTokens id="RequestApproval" />
+          <removesTokens id="TeamAExecuteProject" />
+          <removesTokens id="TeamBExecuteProject" />
+          <removesTokensFromFlow>
+            <flowSource id="AssignTeam" />
+            <flowDestination id="TeamAExecuteProject" />
+          </removesTokensFromFlow>
+          <removesTokensFromFlow>
+            <flowSource id="AssignTeam" />
+            <flowDestination id="TeamBExecuteProject" />
+          </removesTokensFromFlow>
+          <removesTokensFromFlow>
+            <flowSource id="TeamAExecuteProject" />
+            <flowDestination id="RequestApproval" />
+          </removesTokensFromFlow>
+          <removesTokensFromFlow>
+            <flowSource id="TeamBExecuteProject" />
+            <flowDestination id="RequestApproval" />
+          </removesTokensFromFlow>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-e4600e4e-d31b-4192-9006-229761737c56</role>
+                </initialSet>
+              </distributionSet>
+              <familiarParticipant taskID="CreateProjectRequest" />
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Cancel" />
+        </task>
+        <task id="TeamAExecuteProject">
+          <name>TeamAExecuteProject</name>
+          <flowsInto>
+            <nextElementRef id="RequestApproval" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;P_Name&gt;{/Net/P_Name/text()}&lt;/P_Name&gt;" />
+              <mapsTo>P_Name</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;P_Budget&gt;{/Net/P_Budget/text()}&lt;/P_Budget&gt;" />
+              <mapsTo>P_Budget</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;P_Team&gt;{/Net/P_Team/text()}&lt;/P_Team&gt;" />
+              <mapsTo>P_Team</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;P_Requirements&gt;{/Net/P_Requirements/text()}&lt;/P_Requirements&gt;" />
+              <mapsTo>P_Requirements</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;P_ID&gt;{/Net/P_ID/text()}&lt;/P_ID&gt;" />
+              <mapsTo>P_ID</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;P_Implemented&gt;{/TeamAExecuteProject/P_Implemented/text()}&lt;/P_Implemented&gt;" />
+              <mapsTo>P_Implemented</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-274157e0-b32f-48ec-998a-f36a5d594ad8</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="TeamAExecuteProject" />
+        </task>
+        <task id="TeamBExecuteProject">
+          <name>TeamBExecuteProject</name>
+          <flowsInto>
+            <nextElementRef id="RequestApproval" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;P_Requirements&gt;{/Net/P_Requirements/text()}&lt;/P_Requirements&gt;" />
+              <mapsTo>P_Requirements</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;P_Name&gt;{/Net/P_Name/text()}&lt;/P_Name&gt;" />
+              <mapsTo>P_Name</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;P_Budget&gt;{/Net/P_Budget/text()}&lt;/P_Budget&gt;" />
+              <mapsTo>P_Budget</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;P_Team&gt;{/Net/P_Team/text()}&lt;/P_Team&gt;" />
+              <mapsTo>P_Team</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;P_ID&gt;{/Net/P_ID/text()}&lt;/P_ID&gt;" />
+              <mapsTo>P_ID</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;P_Implemented&gt;{/TeamBExecuteProject/P_Implemented/text()}&lt;/P_Implemented&gt;" />
+              <mapsTo>P_Implemented</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-beb23fd0-7bdb-4cf8-b14a-f80c1bcb5ef0</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="TeamBExecuteProject" />
+        </task>
+        <task id="RequestApproval">
+          <name>RequestApproval</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;P_Name&gt;{/Net/P_Name/text()}&lt;/P_Name&gt;" />
+              <mapsTo>P_Name</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;P_Budget&gt;{/Net/P_Budget/text()}&lt;/P_Budget&gt;" />
+              <mapsTo>P_Budget</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;P_Implemented&gt;{/Net/P_Implemented/text()}&lt;/P_Implemented&gt;" />
+              <mapsTo>P_Implemented</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;P_Team&gt;{/Net/P_Team/text()}&lt;/P_Team&gt;" />
+              <mapsTo>P_Team</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;P_Requirements&gt;{/Net/P_Requirements/text()}&lt;/P_Requirements&gt;" />
+              <mapsTo>P_Requirements</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;P_ID&gt;{/Net/P_ID/text()}&lt;/P_ID&gt;" />
+              <mapsTo>P_ID</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;P_Approved&gt;{/RequestApproval/P_Approved/text()}&lt;/P_Approved&gt;" />
+              <mapsTo>P_Approved</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-e4600e4e-d31b-4192-9006-229761737c56</role>
+                </initialSet>
+              </distributionSet>
+              <familiarParticipant taskID="AssignTeam" />
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="RequestApproval" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="AssignTeam" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>P_Name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>P_ID</name>
+        <type>unsignedInt</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>P_Requirements</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>3</index>
+        <name>P_Budget</name>
+        <type>unsignedInt</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>4</index>
+        <name>P_Team</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Cancel" xsi:type="WebServiceGatewayFactsType">
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="CreateProjectRequest" xsi:type="WebServiceGatewayFactsType">
+      <outputParam>
+        <index>0</index>
+        <name>P_Name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam>
+        <index>1</index>
+        <name>P_ID</name>
+        <type>unsignedInt</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam>
+        <index>2</index>
+        <name>P_Requirements</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam>
+        <index>3</index>
+        <name>P_Budget</name>
+        <type>unsignedInt</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="RequestApproval" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>P_Name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>P_ID</name>
+        <type>unsignedInt</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>P_Requirements</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>3</index>
+        <name>P_Budget</name>
+        <type>unsignedInt</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>4</index>
+        <name>P_Team</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>5</index>
+        <name>P_Implemented</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>6</index>
+        <name>P_Approved</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="TeamAExecuteProject" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>P_Name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>P_ID</name>
+        <type>unsignedInt</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>P_Requirements</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>3</index>
+        <name>P_Budget</name>
+        <type>unsignedInt</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>4</index>
+        <name>P_Team</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>5</index>
+        <name>P_Implemented</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="TeamBExecuteProject" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>P_Name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>P_ID</name>
+        <type>unsignedInt</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>P_Requirements</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>3</index>
+        <name>P_Budget</name>
+        <type>unsignedInt</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>4</index>
+        <name>P_Team</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>5</index>
+        <name>P_Implemented</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="US"/>
+    <specification id="Proiect5-MFDA">
+      <size w="58" h="28"/>
+      <net id="Net">
+        <bounds x="0" y="-76" w="1280" h="608"/>
+        <frame x="0" y="0" w="1166" h="535"/>
+        <viewport x="0" y="0" w="1166" h="535"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="1,228" y="328" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="328" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="CreateProjectRequest">
+          <vertex>
+            <attributes>
+              <bounds x="244" y="324" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="199" y="356" w="130" h="20"/>
+            </attributes>
+          </label>
+          <decorator type="AND_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="275" y="324" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="TeamBExecuteProject">
+          <vertex>
+            <attributes>
+              <bounds x="632" y="392" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="580" y="424" w="137" h="21"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Cancel">
+          <vertex>
+            <attributes>
+              <bounds x="388" y="536" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="356" y="568" w="96" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="TeamAExecuteProject">
+          <vertex>
+            <attributes>
+              <bounds x="632" y="196" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="581" y="228" w="135" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="RequestApproval">
+          <vertex>
+            <attributes>
+              <bounds x="904" y="312" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="864" y="344" w="105" h="20"/>
+            </attributes>
+          </label>
+          <decorator type="XOR_join">
+            <position>12</position>
+            <attributes>
+              <bounds x="894" y="312" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="AssignTeam">
+          <vertex>
+            <attributes>
+              <bounds x="424" y="324" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="396" y="356" w="96" h="20"/>
+            </attributes>
+          </label>
+          <decorator type="XOR_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="455" y="324" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <flow source="AssignTeam" target="TeamBExecuteProject">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="CreateProjectRequest" target="Cancel">
+          <ports in="3" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="CreateProjectRequest" target="AssignTeam">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Cancel" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="InputCondition" target="CreateProjectRequest">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="TeamAExecuteProject" target="RequestApproval">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="TeamBExecuteProject" target="RequestApproval">
+          <ports in="13" out="3"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="AssignTeam" target="TeamAExecuteProject">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="RequestApproval" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+      </net>
+    </specification>
+  </layout>
+</specificationSet>
