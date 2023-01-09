@@ -1,0 +1,24 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ProiectListType">
+    <xs:sequence>
+      <xs:element name="Proiect" type="ProiectType" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ProiectType">
+    <xs:sequence>
+      <xs:element name="Proiect_ID" type="xs:positiveInteger" />
+      <xs:element name="Proiect_Budget" type="xs:positiveInteger" />
+      <xs:element name="Proiect_Team" type="TeamType" />
+      <xs:element name="Proiect_Name" type="xs:string" />
+      <xs:element name="Proiect_Requirements" type="xs:string" />
+      <xs:element name="Proiect_Implemented" type="xs:boolean" />
+      <xs:element name="Proiect_Approved" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="TeamType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="A" />
+      <xs:enumeration value="B" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

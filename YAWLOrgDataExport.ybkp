@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orgdata>
+  <participants>
+    <participant id="PA-61c02a79-85b6-4142-bbcf-2ae095afbc6d">
+      <userid>Mannager</userid>
+      <password>XczJa8wYK/YrJXk9fzlcnMWApdM=</password>
+      <firstname>Mannager</firstname>
+      <lastname>M</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-e4600e4e-d31b-4192-9006-229761737c56</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-345f4aaf-e8a3-4c67-9357-6352fe65e33a">
+      <userid>Team-B-Dev</userid>
+      <password>XczJa8wYK/YrJXk9fzlcnMWApdM=</password>
+      <firstname>Team-B</firstname>
+      <lastname>Dev</lastname>
+      <description/>
+      <notes>Member of Team-b.</notes>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-beb23fd0-7bdb-4cf8-b14a-f80c1bcb5ef0</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-4440128c-6f92-463c-bb8f-e20c9793c955">
+      <userid>Team-A-Dev</userid>
+      <password>XczJa8wYK/YrJXk9fzlcnMWApdM=</password>
+      <firstname>Team-A</firstname>
+      <lastname>Dev</lastname>
+      <description/>
+      <notes>Member of team A</notes>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-274157e0-b32f-48ec-998a-f36a5d594ad8</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+  </participants>
+  <roles>
+    <role id="RO-e4600e4e-d31b-4192-9006-229761737c56">
+      <name>Mannanger</name>
+      <description>Can approve, cancel, assign and create projects.</description>
+      <notes/>
+    </role>
+    <role id="RO-274157e0-b32f-48ec-998a-f36a5d594ad8">
+      <name>Team-A</name>
+      <description>Can implement projects assigned to team A.</description>
+      <notes/>
+    </role>
+    <role id="RO-beb23fd0-7bdb-4cf8-b14a-f80c1bcb5ef0">
+      <name>Team-B</name>
+      <description>Can implement projects assigned to team B.</description>
+      <notes/>
+    </role>
+  </roles>
+  <positions/>
+  <capabilities/>
+  <orggroups/>
+  <nonhumanresources/>
+  <nonhumancategories/>
+</orgdata>
+
